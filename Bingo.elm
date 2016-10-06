@@ -5,6 +5,16 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import String exposing (toUpper, repeat, trimRight)
 
+-- newEntry: String -> Number -> Number -> Record
+newEntry phrase points id =
+  {
+    phrase = phrase,
+    points = points,
+    wasSpoken = False,
+    id = id
+  }
+
+
 title  message times =
   message ++ " "
     |> toUpper
@@ -21,17 +31,17 @@ pageFooter =
        [text "Jeremy Cerise"]
     ]
 
-entryItem phrase points =
+entryItem entry =
   li [] [
-  span [class "phrase"] [text phrase],
-  span [class "points"] [text (toString points) ]
+  span [class "phrase"] [text entry.phrase],
+  span [class "points"] [text (toString entry.points) ]
   ]
 
 entryList =
   ul [ ]
-  [
-  entryItem "Future-Proof" 100,
-  entryItem "Doing Agile" 200
+    [
+      entryItem (newEntry "Future-Proof" 100 1),
+      entryItem (newEntry "Doing Agile" 200 2)
     ]
 
 view =
