@@ -7859,20 +7859,45 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
+var _user$project$Bingo$entryItem = F2(
+	function (phrase, points) {
+		return A2(
+			_elm_lang$html$Html$li,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('phrase')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(phrase)
+						])),
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('points')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(
+							_elm_lang$core$Basics$toString(points))
+						]))
+				]));
+	});
 var _user$project$Bingo$entryList = A2(
 	_elm_lang$html$Html$ul,
 	_elm_lang$core$Native_List.fromArray(
 		[]),
 	_elm_lang$core$Native_List.fromArray(
 		[
-			A2(
-			_elm_lang$html$Html$li,
-			_elm_lang$core$Native_List.fromArray(
-				[]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html$text('Furture -Proof')
-				]))
+			A2(_user$project$Bingo$entryItem, 'Future-Proof', 100),
+			A2(_user$project$Bingo$entryItem, 'Doing Agile', 200)
 		]));
 var _user$project$Bingo$pageFooter = A2(
 	_elm_lang$html$Html$footer,
