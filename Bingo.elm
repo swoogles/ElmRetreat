@@ -1,6 +1,7 @@
 module Bingo exposing (..)
 
 import Html exposing (..)
+import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import String exposing (toUpper, repeat, trimRight)
@@ -65,10 +66,12 @@ view model =
   div [ id "container" ]
     [pageHeader,
      entryList model.entries,
+     button [class "sort", onClick Sort] [text "Sort"],
      pageFooter]
 
 -- Wire it all together
 main =
-  initialModel
-    |> update Sort
-    |> view
+  --initialModel
+    --|> update Sort
+    --|> view
+    App.beginnerProgram {model = initialModel, view = view, update = update}
