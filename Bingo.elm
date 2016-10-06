@@ -21,8 +21,18 @@ pageFooter =
        [text "Jeremy Cerise"]
     ]
 
+entryItem phrase points =
+  li [] [
+  span [class "phrase"] [text phrase],
+  span [class "points"] [text (toString points) ]
+  ]
+
 entryList =
-  ul [ ] [ li [] [text "Furture -Proof"] ]
+  ul [ ]
+  [
+  entryItem "Future-Proof" 100,
+  entryItem "Doing Agile" 200
+    ]
 
 view =
   div [ id "container" ]
