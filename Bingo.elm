@@ -27,6 +27,7 @@ newEntry phrase points id =
 type Action
   = NoOp
   | Sort
+  |Delete Int
 
 update action model =
   case action of
@@ -35,6 +36,13 @@ update action model =
 
     Sort ->
       { model | entries = List.sortBy .points model.entries }
+
+    Delete id ->
+      let
+        remainingEntries =
+          List.filter (\e -> e.id /= id) model.entries
+      in
+        { model | entries = remainingEntries }
 
 -- View
 title  message times =
@@ -56,11 +64,15 @@ pageFooter =
 entryItem entry =
   li [] [
     span [class "phrase"] [text entry.phrase],
-    span [class "points"] [text (toString entry.points) ]
+    span [class "points"] [text (toString entry.points) ],
+    button [class "delete", onClick (Delete entry.id)] []
   ]
 
 entryList entries =
-  ul [ ] (List.map entryItem entries)
+  let
+    entryItems = List.map entryItem entries
+  in
+    ul [ ] entryItems
 
 view model =
   div [ id "container" ]
@@ -71,7 +83,4 @@ view model =
 
 -- Wire it all together
 main =
-  --initialModel
-    --|> update Sort
-    --|> view
     App.beginnerProgram {model = initialModel, view = view, update = update}
