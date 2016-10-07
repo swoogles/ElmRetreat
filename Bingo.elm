@@ -5,6 +5,7 @@ import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import String exposing (toUpper, repeat, trimRight)
+import BingoUtils as Utils
 
 -- Model
 type alias Entry = {phrase: String, points: Int, wasSpoken: Bool, id: Int}
@@ -42,6 +43,7 @@ type Action
   | Mark Int
   | UpdatePhraseInput String
   | UpdatePointsInput String
+  | Add
 
 
 
@@ -73,6 +75,22 @@ update action model =
 
     UpdatePointsInput contents ->
       {model | pointsInput = contents}
+
+    Add ->
+      let
+        entryToAdd =
+          newEntry model.phraseInput (Utils.parseInt model.pointsInput) model.nextId
+        isInvalid model =
+          String.isEmpty model.phraseInput || String.isEmpty model.pointsInput
+      in
+        if isInvalid model
+        then model
+        else { model |
+               phraseInput = "",
+               pointsInput = "",
+               entries = entryToAdd :: model.entries,
+               nextId = model.nextId
+             }
 
 -- View
 
@@ -129,7 +147,7 @@ entryForm : Model -> Html Action
 entryForm model =
   div [] [ input [type' "text", placeholder "Phrase", value model.phraseInput, name "phrase", autofocus True, onInput UpdatePhraseInput ] [],
            input [type' "number", placeholder "Points", value model.pointsInput, name "points", onInput UpdatePointsInput] [],
-           button [class "add"] [text "Add"],
+           button [class "add", onClick Add] [text "Add"],
            h2 [] [ text (model.phraseInput ++ " " ++ model.pointsInput)]]
 
 view : Model -> Html Action
