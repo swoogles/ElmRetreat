@@ -7,7 +7,7 @@ import List
 
 main =
   toHtml <| collage 300 300
-    [makeSquare blue 75 ]
+    [ makeSquare blue 75 ]
 
 makeSquare color size =
   filled color (square size)
