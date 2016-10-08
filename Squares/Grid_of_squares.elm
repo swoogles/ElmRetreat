@@ -3,7 +3,7 @@ module SquareGrid exposing (..)
 import Element exposing (..)
 import Color exposing (..)
 import Collage exposing (..)
-import Text exposing (..)
+import Text exposing (color, fromString)
 import List
 
 
@@ -13,7 +13,7 @@ rows =
 
 squareSize =
     -- Actually the size will be one less, so we can see the gaps ;)
-    50
+    60
 
 
 message msg =
